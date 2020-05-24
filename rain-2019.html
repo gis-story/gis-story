@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>rain-2019</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    #features {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    overflow: auto;
+    background: rgba(255, 255, 255, 0.8);
+    }
+    #map canvas {
+    cursor: crosshair;
+    }
+</style>
+</head>
+<body>
+<style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+</style>
+<div class='tableauPlaceholder' id='viz1590257429282' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;__&#47;__2562_15899958494140&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='__2562_15899958494140&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;__&#47;__2562_15899958494140&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1590257429282');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.minWidth='420px';vizElement.style.maxWidth='650px';vizElement.style.width='100%';vizElement.style.height='947px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.minWidth='420px';vizElement.style.maxWidth='650px';vizElement.style.width='100%';vizElement.style.height='947px';} else { vizElement.style.width='100%';vizElement.style.height='1227px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1Ijoic2F0dGF3YXRhcmFiIiwiYSI6ImNpcjMxN3cxcTAwMXFmam5tNGtuY2VjbXcifQ.oQVD5NNye6tRSqiORiLRCw';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: [100.04, 10.907],
+        zoom: 2
+    });
+
+    map.on('load', function() {
+        // add source and layer for museums
+        map.addSource('rain', {
+            type: 'geojson',
+            data:
+                'https://raw.githubusercontent.com/gis-story/gis-story/master/rain-2019.geojson',
+            // cluster: true,
+            // clusterMaxZoom: 14, // Max zoom to cluster points on
+            // clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+        });
+
+        map.addLayer({
+            id: 'rain_<500_mm',
+            type: 'fill',
+            source: 'rain',
+            paint: {
+              // "fill-outline-color": "rgba(236, 231, 231, 1)",
+                "fill-color": "rgba(165, 42, 42, 0.3)"
+            },
+            
+        });
+    });
+
+    
+</script>
+
+</body>
+</html>
